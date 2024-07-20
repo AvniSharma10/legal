@@ -1,9 +1,17 @@
 <%- include("partials/header.ejs") %>
 <h1>Contact Us</h1>
-<form>
-  <input name="name" type="text" class="feedback-input" placeholder="Name" />
-  <input name="email" type="text" class="feedback-input" placeholder="Email" />
-  <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
-  <input type="submit" value="SUBMIT" />
-</form>
-
+<% if (message) { %>
+  <p><%= message %></p>
+  <script>
+    setTimeout(function() {
+      window.location.href = "/";
+    }, 2000); // Redirect after 3 seconds
+  </script>
+<% } else { %>
+  <form action="/contact" method="post">
+    <input name="name" type="text" class="feedback-input" placeholder="Name" required />
+    <input name="email" type="email" class="feedback-input" placeholder="Email" required />
+    <textarea name="text" class="feedback-input" placeholder="Comment" required></textarea>
+    <input type="submit" value="SUBMIT" />
+  </form>
+<% } %>
